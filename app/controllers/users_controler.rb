@@ -20,15 +20,38 @@ class UsersController < ApplicationController
         else
             # tell user they entered invalid credentials
             # redirect them to the login page
+            redirect :"/login"
         end
     end
 
     #what routes do I need for signup?
-    get '/sigup' do 
+    get '/signup' do 
+        erb :signup
+    end
+
+    post '/users' do 
+        if params[:name] != "" && params[:email] != "" && params[:password] != ""
+            @user = User.create(params)
+            session[:user_id] = @user.id
+            redirect "/users/#{@user.id}"
+        else
+            redirect "/signup"
+        end
+    end
+
+    get '/users' do 
+        erb :users 
+    end
+
+    get '/logout' do 
+        session.clear
+        redirect '/'
     end
 
     #user show route
     get '/users/:id' do 
-        "this will be my user show route"
+        @user = User.find_by(id: params[:id])
+        erb :"/users/show"
+        # "this will be my user show route"
     end
 end
