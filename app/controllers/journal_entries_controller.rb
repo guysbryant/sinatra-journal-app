@@ -6,6 +6,9 @@ class JournalEntries < ApplicationController
     end
 
     #post journal_entries to create a new journal entry
+    post '/journal_entries' do 
+        
+    end
 
     #show route for a journal entry
     get '/journal_entries/show' do 
