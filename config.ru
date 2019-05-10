@@ -9,4 +9,5 @@ use Rack::MethodOverride
 
 # use any other controllers
 use UsersController
+use JournalEntries
 run ApplicationController
