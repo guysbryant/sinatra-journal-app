@@ -14,6 +14,7 @@ class UsersController < ApplicationController
         if @user.authenticate(params[:password])
             # log the user in aka create the user session
             session[:user_id] = @user.id
+            session[:user_name] = @user.name
             # redirect to the user's landing page (show?, index? dashboard?)
             puts session
             redirect "users/#{@user.id}"
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
         if params[:name] != "" && params[:email] != "" && params[:password] != ""
             @user = User.create(params)
             session[:user_id] = @user.id
+            session[:user_name] = @user.name
             redirect "/users/#{@user.id}"
         else
             redirect "/signup"
