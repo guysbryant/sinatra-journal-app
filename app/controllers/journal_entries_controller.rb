@@ -14,13 +14,19 @@ class JournalEntries < ApplicationController
             @journal_entry = JournalEntry.create(content: params[:content], user_id: current_user.id)
             redirect "/journal_entries/#{@journal_entry.id}"
         else
-            erb :"/journal_entries/new"
+            redirect :"/journal_entries/new"
         end
     end
 
     #show route for a journal entry
-    get '/journal_entries/show' do 
+    get '/journal_entries/:id' do 
+        @journal_entry = JournalEntry.find(params[:id])
         erb :"/journal_entries/show"
+    end
+
+    #send us to journal_entries/edit.erb
+    get '/journal_entries/:id/edit' do
+        erb :"/journal_entries/edit"
     end
 
     #index route for all journal entries
