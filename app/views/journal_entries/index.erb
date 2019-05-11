@@ -1,1 +1,11 @@
-journal index
+<h2>journal index</h2>
+
+<% @journal_entries.each do |entry| %>
+    <p>
+    <%= entry.content %><p>
+    <a href="/journal_entries/<%= entry.id %>"> <%= entry.created_at %></a><p>
+    <a href="/users/<%= entry.user_id %>"> <%= entry.user.name %></a>
+    <hr>
+    <p>
+    <p>
+<% end %>
