@@ -15,12 +15,12 @@
   </head>
   <body>
     <nav>
-      <% if session[:user_name] %>
+      <% if current_user %>
         <a href="/users/<%= session[:user_id] %>">Logged in as <%= session[:user_name] %> </a><p>
+        <a href="/logout">Logout</a>
+        <a href="/journal_entries">All Journal Entries</a>
+        <a href="/journal_entries/new">New Entry</a>
       <% end %>
-      <a href="/logout">Logout</a>
-      <a href="/journal_entries">All Journal Entries</a>
-      <a href="/journal_entries/new">New Entry</a>
     </nav>
     <div class="wrapper">
 

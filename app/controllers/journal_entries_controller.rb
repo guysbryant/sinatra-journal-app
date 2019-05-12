@@ -53,7 +53,7 @@ class JournalEntries < ApplicationController
         #1. Find journal entry
         set_journal_entry
         if logged_in?
-            if owns?(@journal_entry)
+            if owns?(@journal_entry) && params[:content] != ""
                 #2. Update the journal entry
                 @journal_entry.update(content: params[:content])
                 #3. redirect to journal entry show page
