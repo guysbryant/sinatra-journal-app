@@ -23,6 +23,11 @@ class JournalEntries < ApplicationController
         end
     end
 
+    #index route for all journal entries
+    get '/journal_entries/index' do 
+        erb :"/journal_entries/index"
+    end
+
     #show route for a journal entry
     get '/journal_entries/:id' do 
         set_journal_entry
@@ -61,10 +66,14 @@ class JournalEntries < ApplicationController
         end
     end
 
-    #index route for all journal entries
-    get '/journal_entries/index' do 
-        erb :"/journal_entries/index"
+    delete "/journal_entries/:id" do 
+        set_journal_entry
+        if owns?(@journal_entry)
+           @journal_entry.destroy
+        end
+        redirect "/journal_entries"
     end
+
 
     private 
 
