@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         # Find the User
         @user = User.find_by(email: params[:email])
         # Authenticate the user 
-        if @user.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password])
             # log the user in aka create the user session
             session[:user_id] = @user.id
             session[:user_name] = @user.name
