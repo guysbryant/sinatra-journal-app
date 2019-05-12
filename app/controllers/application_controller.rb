@@ -26,5 +26,9 @@ class ApplicationController < Sinatra::Base
     def current_user
         @current_user ||= User.find_by(id: session[:user_id]) #memoization to reduce database calls
     end
+
+    def owns?(journal_entry)
+        current_user == journal_entry.user
+    end
   end
 end
