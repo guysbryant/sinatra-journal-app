@@ -22,6 +22,10 @@
         <a href="/journal_entries/new">New Entry</a>
       <% end %>
     </nav>
+    <% if flash[:message] %>
+        <h3><%= flash[:message] %></h3>
+    <% end %>
+
     <div class="wrapper">
 
         <%= yield %>
