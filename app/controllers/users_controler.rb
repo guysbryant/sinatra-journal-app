@@ -16,7 +16,6 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             session[:user_name] = @user.name
             # redirect to the user's landing page (show?, index? dashboard?)
-            puts session
             redirect "users/#{@user.id}"
         else
             # tell user they entered invalid credentials
