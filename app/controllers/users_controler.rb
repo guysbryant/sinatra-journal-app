@@ -19,6 +19,7 @@ class UsersController < ApplicationController
             redirect "users/#{@user.id}"
         else
             # tell user they entered invalid credentials
+            flash[:message] = "Your credentials are invalid. Please sign up or try again."
             # redirect them to the login page
             redirect :"/login"
         end
