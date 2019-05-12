@@ -2,7 +2,11 @@
 
 <% if owns?(@journal_entry) %>
     <a href="/journal_entries/<%= @journal_entry.id %>/edit">Edit Entry</a>
-    <a href="">Delete Link</a>
+
+    <form action="/journal_entries/<%= @journal_entry.id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Entry">
+    </form>
     <p>
 <% end %>
 <p>
