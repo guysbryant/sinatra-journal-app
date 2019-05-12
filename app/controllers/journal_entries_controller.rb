@@ -33,7 +33,7 @@ class JournalEntries < ApplicationController
     get '/journal_entries/:id/edit' do
         set_journal_entry
         if logged_in?
-            if @journal_entry.user == current_user
+            if owns?(@journal_entry)
                 erb :"/journal_entries/edit"
             else
                 redirect "/users/#{current_user.id}"
@@ -48,7 +48,7 @@ class JournalEntries < ApplicationController
         #1. Find journal entry
         set_journal_entry
         if logged_in?
-            if @journal_entry.user == current_user
+            if owns?(@journal_entry)
                 #2. Update the journal entry
                 @journal_entry.update(content: params[:content])
                 #3. redirect to journal entry show page
