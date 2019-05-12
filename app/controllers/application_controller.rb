@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "secret" #sets a session ID in the session hash with the given value
                                   #this prevents someone from highjacking a session because they won't have the right secret
+    register Sinatra::Flash
   end
 
   get "/" do
