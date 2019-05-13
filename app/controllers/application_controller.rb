@@ -31,5 +31,11 @@ class ApplicationController < Sinatra::Base
     def owns?(journal_entry)
         current_user == journal_entry.user
     end
+
+    def redirect_if_not_logged_in
+      if !logged_in?
+        redirect '/'
+      end
+    end
   end
 end
