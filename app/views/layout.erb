@@ -16,7 +16,7 @@
   <body>
     <nav>
       <% if current_user %>
-        <a href="/users/<%= session[:user_id] %>">Logged in as <%= session[:user_name] %> </a><p>
+        <a href="/users/<%= session[:user_id] %>">Logged in as <%= current_user.name %> </a><p>
         <a href="/logout">Logout</a>
         <a href="/journal_entries">All Journal Entries</a>
         <a href="/journal_entries/new">New Entry</a>
