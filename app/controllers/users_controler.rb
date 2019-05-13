@@ -52,6 +52,7 @@ class UsersController < ApplicationController
     #user show route
     get '/users/:id' do 
         @user = User.find_by(id: params[:id])
+        redirect_if_not_logged_in
         erb :"/users/show"
         # "this will be my user show route"
     end

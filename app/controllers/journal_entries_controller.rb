@@ -12,9 +12,7 @@ class JournalEntries < ApplicationController
 
     #post journal_entries to create a new journal entry
     post '/journal_entries' do 
-        if !logged_in?
-            redirect "/"
-        end
+        redirect_if_not_logged_in
         if params[:content] != ""
             @journal_entry = JournalEntry.create(content: params[:content], user_id: current_user.id)
             flash[:message] = "Congrats on your new journal entry."
@@ -39,32 +37,27 @@ class JournalEntries < ApplicationController
     #send us to journal_entries/edit.erb
     get '/journal_entries/:id/edit' do
         set_journal_entry
-        if logged_in?
-            if owns?(@journal_entry)
-                erb :"/journal_entries/edit"
-            else
-                redirect "/users/#{current_user.id}"
-            end
+        redirect_if_not_logged_in
+        if owns?(@journal_entry)
+            erb :"/journal_entries/edit"
         else
-            redirect "/"
+            redirect "/users/#{current_user.id}"
         end
+        
     end
 
     #update journal entry in DB
     patch '/journal_entries/:id' do
         #1. Find journal entry
         set_journal_entry
-        if logged_in?
-            if owns?(@journal_entry) && params[:content] != ""
-                #2. Update the journal entry
-                @journal_entry.update(content: params[:content])
-                #3. redirect to journal entry show page
-                redirect "/journal_entries/#{@journal_entry.id}"
-            else
-                redirect "/users/#{current_user.id}"
-            end
+        redirect_if_not_logged_in
+        if owns?(@journal_entry) && params[:content] != ""
+            #2. Update the journal entry
+            @journal_entry.update(content: params[:content])
+            #3. redirect to journal entry show page
+            redirect "/journal_entries/#{@journal_entry.id}"
         else
-            redirect "/"
+            redirect "/users/#{current_user.id}"
         end
     end
 
